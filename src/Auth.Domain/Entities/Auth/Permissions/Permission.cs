@@ -1,4 +1,5 @@
-﻿using Auth.Domain.Entities.Auth.Roles;
+﻿using Auth.Domain.Entities.Auth.RolePermissions;
+using Auth.Domain.Entities.Auth.Roles;
 using Auth.Domain.Entities.BaseEntities;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,6 @@ namespace Auth.Domain.Entities.Auth.Permissions
         public int Code { get; set; }
 
         public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<RolePermission> RolePermissions { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Auth.Domain.Entities.BaseEntities;
+﻿    using Auth.Domain.Entities.BaseEntities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

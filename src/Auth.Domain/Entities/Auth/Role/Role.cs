@@ -1,4 +1,6 @@
 ﻿using Auth.Domain.Entities.Auth.Permissions;
+using Auth.Domain.Entities.Auth.RolePermissions;
+using Auth.Domain.Entities.Auth.UserRoles;
 using Auth.Domain.Entities.Auth.Users;
 using Auth.Domain.Entities.BaseEntities;
 using System;
@@ -16,7 +18,7 @@ namespace Auth.Domain.Entities.Auth.Roles
         [Column("name")]
         public string Name { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
-        public virtual ICollection<Permission> Permissions { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<RolePermission> RolePermissions { get; set; }
     }
 }
