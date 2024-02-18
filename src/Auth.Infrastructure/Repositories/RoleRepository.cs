@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Auth.Infrastructure.Repositories
 {
-    public class RoleRepository : RepsoitoryBase<Role, long>, IRoleRepsoitory
+    public class RoleRepository : RepositoryBase<Role, long>, IRoleRepsoitory
     {
         public RoleRepository(AuthDbContext dbContext) : base(dbContext)
         {

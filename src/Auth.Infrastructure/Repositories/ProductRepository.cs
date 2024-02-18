@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Auth.Infrastructure.Repositories
 {
-    public class ProductRepository : RepsoitoryBase<Product, long>, IProductRepository
+    public class ProductRepository : RepositoryBase<Product, long>, IProductRepository
     {
         public ProductRepository(AuthDbContext dbContext) : base(dbContext)
         {

@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Auth.Infrastructure.Repositories
 {
-    public class RepsoitoryBase<T, TId> : IRepositoryBase<T, TId> , IAsyncEnumerable<T>
+    public class RepositoryBase<T, TId> : IRepositoryBase<T, TId> , IAsyncEnumerable<T>
     where T : BaseEntity<TId>
     {
         private readonly DbContext dbContext;
 
-        public RepsoitoryBase(DbContext dbContext)
+        public RepositoryBase(DbContext dbContext)
         {
             this.dbContext = dbContext;
         }

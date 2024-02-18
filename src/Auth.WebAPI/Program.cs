@@ -1,4 +1,8 @@
 
+using Auth.Infrastructure;
+using Auth.Infrastructure.DbContexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace Auth.WebAPI
 {
     public class Program
@@ -7,16 +11,21 @@ namespace Auth.WebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddDbContext<AuthDbContext>(optionsAction =>
+            {
+                optionsAction.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            builder.Services.AddInfrastructure(builder.Configuration);
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

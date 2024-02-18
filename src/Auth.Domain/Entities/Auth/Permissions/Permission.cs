@@ -1,20 +1,14 @@
 ﻿using Auth.Domain.Entities.Auth.RolePermissions;
 using Auth.Domain.Entities.Auth.Roles;
 using Auth.Domain.Entities.BaseEntities;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Auth.Domain.Entities.Auth.Permissions
 {
     [Table("ermission",Schema ="auth_full" )]
-    public class Permission 
+    public class Permission  : AuditableBaseEntity<long>
     {
         [Column("name")]
-        public MultiLanguageField  Name { get; set; }
+        public string  Name { get; set; }
         [Column("code")]
         public int Code { get; set; }
 

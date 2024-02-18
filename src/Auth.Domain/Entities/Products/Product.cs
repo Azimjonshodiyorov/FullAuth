@@ -14,9 +14,9 @@ namespace Auth.Domain.Entities.Products
     public class Product : AuditableBaseEntity<long>
     {
         [Column("name")]
-        public MultiLanguageField Name { get; set; }
+        public string Name { get; set; }
         [Column("description")]
-        public MultiLanguageField Discription { get; set; }
+        public string Discription { get; set; }
         [Column("price")]
         public decimal Price { get; set; }
         [Column("product_status")]

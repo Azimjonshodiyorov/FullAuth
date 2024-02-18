@@ -1,4 +1,4 @@
-﻿using Auth.Domain.Entities.Auth.Users;
+﻿using Auth.Domain.Entities.Auth.UserRoles;
 using Auth.Infrastructure.DbContexts;
 using Auth.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace Auth.Infrastructure.Repositories
 {
-    public class UserRepository : RepositoryBase<User, long>, IUserRepository
+    public class UserRoleRepository : RepositoryBase<UserRole, long>, IUserRoleRepository
     {
-        public UserRepository(AuthDbContext dbContext) : base(dbContext)
+        public UserRoleRepository(AuthDbContext dbContext) 
+            : base(dbContext)
         {
         }
     }

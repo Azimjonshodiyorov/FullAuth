@@ -1,4 +1,4 @@
-﻿using Auth.Domain.Dtos;
+﻿using Auth.Domain.Dtos.UserDto;
 using Auth.Domain.Entities.Auth.Users;
 using System;
 using System.Collections.Generic;
