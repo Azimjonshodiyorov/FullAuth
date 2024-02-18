@@ -18,6 +18,8 @@ namespace Auth.Infrastructure.DbContexts
         public AuthDbContext(DbContextOptions<AuthDbContext> contextOptions)
             : base(contextOptions)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
         }
 
         public AuthDbContext()

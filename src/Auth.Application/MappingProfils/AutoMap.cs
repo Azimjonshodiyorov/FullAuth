@@ -14,18 +14,18 @@ namespace Auth.Application.MappingProfils
     {
         public AutoMap()
         {
-            CreateMap<User , UserDto>();
-            CreateMap<UserRole , PostUserRoleDto>();
-            CreateMap<UserRole , GetUserRoleDto>();
-            CreateMap<UserRole , UpdateUserRoleDto>();
-            CreateMap<Permission, UpdatePermissionDto>();
-            CreateMap<Permission, DeletePermissionDto>();
-            CreateMap<Permission, PostPermissionDto>();
-            CreateMap<Permission, GetPermissionDto>();
-            CreateMap<Role, DeleteRoleDto>();
-            CreateMap<Role, UpdateRoleDto>();
-            CreateMap<Role, PostRoleDto>();
-            CreateMap<Role, GetRoleDto>();
+            CreateMap<User , UserDto>().ReverseMap();
+            CreateMap<UserRole , PostUserRoleDto>().ReverseMap();
+            CreateMap<UserRole , GetUserRoleDto>().ReverseMap();
+            CreateMap<UserRole , UpdateUserRoleDto>().ReverseMap();
+            CreateMap<Permission, UpdatePermissionDto>().ReverseMap();
+            CreateMap<Permission, DeletePermissionDto>().ReverseMap();
+            CreateMap<Permission, PostPermissionDto>().ReverseMap();
+            CreateMap<Permission, GetPermissionDto>().ReverseMap();
+            CreateMap<Role, DeleteRoleDto>().ReverseMap();
+            CreateMap<Role, UpdateRoleDto>().ReverseMap();
+            CreateMap<Role, PostRoleDto>().ReverseMap();
+            CreateMap<Role, GetRoleDto>().ReverseMap();
         }
     }
 }

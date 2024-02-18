@@ -1,4 +1,5 @@
 ﻿using Auth.Application.Interfaces;
+using Auth.Application.MappingProfils;
 using Auth.Application.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ namespace Auth.Application
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IPermissionService, PermissionService>();
+
             services.AddTransient<IUserRoleService, UserRoleService>();
             return services;
         }

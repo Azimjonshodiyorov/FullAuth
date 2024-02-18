@@ -1,4 +1,6 @@
 ﻿using Auth.Application.Interfaces;
+using Auth.Domain.Dtos.UserDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +8,7 @@ namespace Auth.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
@@ -15,11 +18,23 @@ namespace Auth.WebAPI.Controllers
             this.userService = userService;
         }
 
-        [HttpPost]
-        public IActionResult Post()
+        [HttpGet , AllowAnonymous]
+        public async Task<IActionResult> Get()
         {
-            return Ok();
+           var result =   await  this.userService.GetAllAsync();
+
+            return Ok(result);
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Post(UserDto userDto)
+        {
+            var result = await this.userService.CreateUserAsync(userDto);
+            return Ok(result);
+        }
+
+                
 
     }
 }
