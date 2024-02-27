@@ -5,11 +5,6 @@ using Auth.Domain.Entities.Auth.UserRoles;
 using Auth.Infrastructure.Repositories.Interfaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Auth.Application.Services
 {

@@ -18,6 +18,8 @@ namespace Auth.Domain.Entities.Auth.Users
         public string PhoneNumber { get; set; }
         [Column("email")]
         public string Email { get; set; }
+        [Column("password")]
+        public string Password { get; set; }
         [Column("is_bloked")]
         public bool IsBlocked { get; set; } = false;
 

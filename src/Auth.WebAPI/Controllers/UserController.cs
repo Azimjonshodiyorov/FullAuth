@@ -8,7 +8,6 @@ namespace Auth.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
@@ -18,20 +17,44 @@ namespace Auth.WebAPI.Controllers
             this.userService = userService;
         }
 
-        [HttpGet , AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
-           var result =   await  this.userService.GetAllAsync();
-
-            return Ok(result);
+            return Ok(this.userService.GetAllAsync());
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Post(UserDto userDto)
+        public async Task<IActionResult> Post(PostUserDto userDto)
         {
-            var result = await this.userService.CreateUserAsync(userDto);
-            return Ok(result);
+            return Ok(await this.userService.CreateUserAsync(userDto)); 
+        }
+
+        [HttpGet("id")]
+        public async Task<IActionResult> GetById([FromQuery] long id)
+        {
+            return Ok(await this.userService.GetByIdAsync(id));
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateUserDto updateUserDto)
+        {
+            return Ok(await this.userService.UpdateUserAsync(updateUserDto));
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(DeleteUserDto deleteUserDto)
+        {
+            return Ok(await this.userService.RemoveUserAsync(deleteUserDto));   
+        }
+
+
+
+
+        [HttpPost("token")]
+        public async Task<IActionResult> GetToken([FromBody] UserCredentials userCredentials)
+        {
+            return Ok(await this.userService.LoginUserAsync(userCredentials));
         }
 
                 

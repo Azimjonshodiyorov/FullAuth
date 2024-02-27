@@ -162,7 +162,8 @@ namespace Auth.Application.Services
                 ValidIssuer = _option.Value.Issuer,
                 RequireExpirationTime = false,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_option.Value.SecretKey))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_option.Value.SecretKey)),
+                ClockSkew = TimeSpan.Zero,
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

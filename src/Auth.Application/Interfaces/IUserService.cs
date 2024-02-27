@@ -1,4 +1,5 @@
 ﻿using Auth.Domain.Dtos.UserDto;
+using Auth.Domain.Entities.Auth.Tokens;
 using Auth.Domain.Entities.Auth.Users;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,13 @@ namespace Auth.Application.Interfaces
 {
     public interface IUserService
     {
-        Task<User> GetByIdAsync(long id);
-        Task<IQueryable<User>> GetAllAsync();
+        Task<GetUserDto> GetByIdAsync(long id);
+        Task<IQueryable<GetAllUserDto>> GetAllAsync();
         Task<User?> GetByEmailAsync(string email);
-        Task<User> RemoveUserAsync(UserDto user);
-        Task<User> UpdateUserAsync(UserDto user);
-        Task<User> CreateUserAsync(UserDto user);
+        Task<User> RemoveUserAsync(DeleteUserDto user);
+        Task<User> UpdateUserAsync(UpdateUserDto user);
+        Task<User> CreateUserAsync(PostUserDto user);
+        Task<UserToken> LoginUserAsync(UserCredentials userCredential);
 
     }
 }

@@ -15,11 +15,14 @@ namespace Auth.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IRoleService, RoleService>();
-            services.AddTransient<IPermissionService, PermissionService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IPermissionService, PermissionService>();
 
-            services.AddTransient<IUserRoleService, UserRoleService>();
+            services.AddScoped<IUserRoleService, UserRoleService>();
+
+            services.AddScoped<IProductService , ProductService>();
             return services;
         }
     }

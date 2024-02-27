@@ -8,7 +8,7 @@ namespace Auth.Application.Validations
         {
             if (obj is null)
             {
-                throw new ArgumentNullException(nameof(obj));
+                throw new ArgumentNullException("Null Object is comeing : " + nameof(obj));
             }
         }
 
@@ -16,7 +16,7 @@ namespace Auth.Application.Validations
         public static void ProportyIsNull<Type>(Type type)
         {
             if (type is null)
-            { throw new ArgumentNullException(nameof(type)); }
+            { throw new ArgumentNullException("null is comeing : "  + nameof(type)); }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Auth.Application.Interfaces;
-using Auth.Application.MappingProfils;
 using Auth.Application.Validations;
 using Auth.Domain.Dtos.UserDto;
+using Auth.Domain.Entities.Auth.Tokens;
 using Auth.Domain.Entities.Auth.Users;
 using Auth.Infrastructure.Repositories.Interfaces;
 using AutoMapper;
@@ -14,14 +14,16 @@ namespace Auth.Application.Services
         private readonly IUserRepository userRepository;
         private readonly IMapper mapper;
         private readonly IUnitOfWork unitOfWork;
+        private readonly IJwtService jwtService;
 
-        public UserService(IUserRepository userRepository , IMapper mapper , IUnitOfWork unitOfWork)
+        public UserService(IUserRepository userRepository , IMapper mapper , IUnitOfWork unitOfWork , IJwtService jwtService)
         {
             this.userRepository = userRepository;
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
+            this.jwtService = jwtService;
         }
-        public async Task<User> CreateUserAsync(UserDto user)
+        public async Task<User> CreateUserAsync(PostUserDto user)
         {
            ObjectValidations.ObjectIsNull(user);
 
@@ -34,9 +36,11 @@ namespace Auth.Application.Services
             return result;
         }
 
-        public async Task<IQueryable<User>> GetAllAsync()
+        public async Task<IQueryable<GetAllUserDto>> GetAllAsync()
         {
-            return  this.userRepository.GetAllAsQueryable();
+            var resu=  this.userRepository.GetAllAsQueryable();
+            var result = this.mapper.Map<List<GetAllUserDto>>(resu.ToList());
+            return result.AsQueryable();
         }
 
         public async Task<User?> GetByEmailAsync(string email)
@@ -46,25 +50,27 @@ namespace Auth.Application.Services
             return result;
         }
 
-        public async Task<User> GetByIdAsync(long id)
+        public async Task<GetUserDto> GetByIdAsync(long id)
         {
-            ObjectValidations.ProportyIsNull(id);
+            
 
             var result = await this.userRepository.GetByIdAsync(id);
+            ObjectValidations.ObjectIsNull(result);
+            var mapps = this.mapper.Map<GetUserDto>(result);
 
-            return result;
+            return mapps;
         }
 
-        public async Task<User> RemoveUserAsync(UserDto user)
+        public async Task<User> RemoveUserAsync(DeleteUserDto user)
         {
-            ObjectValidations.ObjectIsNull<UserDto>(user);
+            ObjectValidations.ObjectIsNull(user);
             var mapps = this.mapper.Map<User>(user);
             var result = await this.userRepository.RemoveAsync(mapps);
             await this.unitOfWork.SaveChangesAsync();
             return result;
         }
 
-        public async Task<User> UpdateUserAsync(UserDto user)
+        public async Task<User> UpdateUserAsync(UpdateUserDto user)
         {
             ObjectValidations.ObjectIsNull(user);
 
@@ -75,5 +81,29 @@ namespace Auth.Application.Services
 
             return result;
         }
+
+        public async Task<UserToken> LoginUserAsync(UserCredentials userCredential)
+        {
+
+           var user = await this.userRepository.GetAllAsQueryable()
+                .FirstOrDefaultAsync(x=>x.Email == userCredential.Email && x.Password == userCredential.Password);
+
+            ObjectValidations.ObjectIsNull(user);
+
+              var result = await this.jwtService.GenerateRefreshToken(user);
+             
+            UserToken userToken = await this.jwtService.GenerateAccessTokens(user);
+
+
+            return userToken;
+
+        }
+
+
+
+        /*public async Task<UserToken> RefreshTokenAsync(UserToken userToken)
+        {
+
+        }*/
     }
 }
